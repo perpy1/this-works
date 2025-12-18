@@ -1,6 +1,8 @@
-# Twitter Breakout Analyzer
+# Topic Breakout Analyzer
 
-A powerful web tool that analyzes Twitter topics and returns a "breakout score" indicating opportunity level for creators to create content in that niche. The tool scrapes recent Twitter data, analyzes engagement patterns, competition levels, and trend velocity, then suggests 3 specific subtopic angles within the main topic.
+A powerful web tool that analyzes social media topics and returns a "breakout score" indicating opportunity level for creators to create content in that niche. The tool collects recent data from multiple platforms, analyzes engagement patterns, competition levels, and trend velocity, then suggests 3 specific subtopic angles within the main topic.
+
+> **🆓 FREE VERSION AVAILABLE!** Use Reddit as your data source - no API keys needed, completely free! See [ALTERNATIVES.md](ALTERNATIVES.md) for details.
 
 ![Twitter Breakout Analyzer](docs/screenshot.png)
 
@@ -28,7 +30,9 @@ A powerful web tool that analyzes Twitter topics and returns a "breakout score" 
 - Natural language processing libraries (natural, compromise, stopword)
 
 ### APIs & Services
-- Twitter API v2 for data collection
+- **Multi-platform support**: Twitter, Reddit, or both
+- **Reddit API** (FREE - no key needed!) - Default platform
+- Twitter API v2 (optional, for Twitter-specific analysis)
 - PostgreSQL for caching and analytics
 
 ## Architecture
@@ -46,13 +50,22 @@ A powerful web tool that analyzes Twitter topics and returns a "breakout score" 
 │   (Port 3001)   │
 └────────┬────────┘
          │
-    ┌────┴────┐
-    │         │
-    ▼         ▼
-┌─────────┐ ┌──────────────┐
-│ Twitter │ │  PostgreSQL  │
-│  API v2 │ │   Database   │
-└─────────┘ └──────────────┘
+    ┌────┴────────────┐
+    │                 │
+    ▼                 ▼
+┌─────────────┐ ┌──────────────┐
+│  Platform   │ │  PostgreSQL  │
+│  Adapter    │ │   Database   │
+└──────┬──────┘ └──────────────┘
+       │
+   ┌───┴────┐
+   │        │
+   ▼        ▼
+┌────────┐ ┌─────────┐
+│ Reddit │ │ Twitter │
+│  API   │ │  API v2 │
+│ (FREE!)│ │($100/mo)│
+└────────┘ └─────────┘
 ```
 
 ## Installation
@@ -61,7 +74,8 @@ A powerful web tool that analyzes Twitter topics and returns a "breakout score" 
 
 - Node.js 18+ installed
 - PostgreSQL 14+ installed and running
-- Twitter API v2 Bearer Token (get from [Twitter Developer Portal](https://developer.twitter.com/))
+- **Reddit mode (FREE)**: No API keys needed!
+- **Twitter mode (Optional)**: Twitter API v2 Bearer Token (get from [Twitter Developer Portal](https://developer.twitter.com/)) - costs $100+/month
 
 ### Step 1: Clone the Repository
 
@@ -104,13 +118,33 @@ Create a `.env` file in the `backend` directory:
 cp backend/.env.example backend/.env
 ```
 
-Edit `backend/.env` and add your credentials:
+Edit `backend/.env` and configure your settings:
+
+**For FREE Reddit mode (recommended for getting started):**
 
 ```env
 PORT=3001
 NODE_ENV=development
 
-# Twitter API v2 Credentials
+# Use Reddit (FREE - no API key needed!)
+DATA_PLATFORM=reddit
+
+# PostgreSQL Database
+DB_HOST=localhost
+DB_PORT=5432
+DB_NAME=twitter_breakout
+DB_USER=postgres
+DB_PASSWORD=your_postgres_password
+```
+
+**For Twitter mode (requires $100+/month API subscription):**
+
+```env
+PORT=3001
+NODE_ENV=development
+
+# Use Twitter
+DATA_PLATFORM=twitter
 TWITTER_BEARER_TOKEN=your_actual_bearer_token_here
 
 # PostgreSQL Database
@@ -120,6 +154,16 @@ DB_NAME=twitter_breakout
 DB_USER=postgres
 DB_PASSWORD=your_postgres_password
 ```
+
+**For Multi-platform mode (combines both):**
+
+```env
+DATA_PLATFORM=multi
+TWITTER_BEARER_TOKEN=your_actual_bearer_token_here
+# ... rest of config
+```
+
+See [ALTERNATIVES.md](ALTERNATIVES.md) for more data source options (Apify, RapidAPI, etc.)
 
 ### Step 5: Run the Application
 
