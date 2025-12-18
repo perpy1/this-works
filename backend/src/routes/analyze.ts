@@ -1,5 +1,5 @@
 import { Router, Request, Response } from 'express';
-import twitterService from '../services/twitterService';
+import platformAdapter from '../services/platformAdapter';
 import scoringEngine from '../services/scoringEngine';
 import subtopicExtractor from '../services/subtopicExtractor';
 import db from '../database/db';
@@ -71,27 +71,24 @@ router.post('/', async (req: Request, res: Response) => {
 
     console.log(`Analyzing topic: ${cleanTopic}`);
 
-    const searchResponse = await twitterService.searchTweetsWithPagination(
-      cleanTopic,
-      500,
-      30
-    );
+    // Use platform adapter to get data from configured source (Twitter, Reddit, or Multi)
+    const searchResponse = await platformAdapter.search(cleanTopic, 500, 30);
 
-    if (searchResponse.tweets.length < 10) {
+    if (searchResponse.posts.length < 10) {
       return res.status(404).json({
         error: 'Insufficient data',
-        message: `Only found ${searchResponse.tweets.length} tweets for this topic. Need at least 10 tweets for analysis.`,
+        message: `Only found ${searchResponse.posts.length} posts for this topic. Need at least 10 posts for analysis.`,
       });
     }
 
     const analysis = scoringEngine.analyzeTopicBreakout(
-      searchResponse.tweets,
+      searchResponse.posts as any,
       searchResponse.users
     );
 
     const subtopics = await subtopicExtractor.extractSubtopics(
       cleanTopic,
-      searchResponse.tweets,
+      searchResponse.posts as any,
       searchResponse.users,
       3
     );
@@ -162,7 +159,7 @@ router.post('/', async (req: Request, res: Response) => {
     if (error.message?.includes('rate limit')) {
       return res.status(429).json({
         error: 'Rate limit exceeded',
-        message: 'Twitter API rate limit reached. Please try again later.',
+        message: 'API rate limit reached. Please try again later.',
       });
     }
 
