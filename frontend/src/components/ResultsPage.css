@@ -1,0 +1,294 @@
+.results-page {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.results-container {
+  background: white;
+  border-radius: 16px;
+  padding: 40px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+}
+
+.back-button {
+  padding: 12px 24px;
+  background: #f3f4f6;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #374151;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  margin-bottom: 30px;
+  font-family: inherit;
+}
+
+.back-button:hover {
+  background: #e5e7eb;
+  transform: translateX(-4px);
+}
+
+.results-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 40px;
+}
+
+.topic-title {
+  font-size: 36px;
+  font-weight: 700;
+  color: #111827;
+}
+
+.cached-badge {
+  padding: 6px 12px;
+  background: #dbeafe;
+  color: #1e40af;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.score-section {
+  margin-bottom: 40px;
+}
+
+.breakout-score {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  padding: 30px;
+  background: linear-gradient(135deg, #f9fafb 0%, #f3f4f6 100%);
+  border-radius: 12px;
+}
+
+.score-circle {
+  width: 140px;
+  height: 140px;
+  border: 8px solid;
+  border-radius: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.score-number {
+  font-size: 48px;
+  font-weight: 700;
+  color: #111827;
+}
+
+.score-label {
+  font-size: 18px;
+  color: #6b7280;
+  font-weight: 600;
+}
+
+.score-info {
+  flex: 1;
+}
+
+.opportunity-level {
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.opportunity-message {
+  font-size: 16px;
+  color: #6b7280;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+  margin-bottom: 40px;
+}
+
+.stat-card {
+  padding: 24px;
+  background: #f9fafb;
+  border-radius: 12px;
+  text-align: center;
+}
+
+.stat-label {
+  font-size: 14px;
+  color: #6b7280;
+  margin-bottom: 8px;
+  font-weight: 500;
+}
+
+.stat-value {
+  font-size: 32px;
+  font-weight: 700;
+  color: #111827;
+}
+
+.metrics-section,
+.subtopics-section,
+.detailed-metrics {
+  margin-bottom: 40px;
+}
+
+.section-title {
+  font-size: 24px;
+  font-weight: 700;
+  color: #111827;
+  margin-bottom: 24px;
+}
+
+.metrics-grid {
+  display: grid;
+  gap: 20px;
+}
+
+.metric-item {
+  padding: 20px;
+  background: #f9fafb;
+  border-radius: 12px;
+}
+
+.metric-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.metric-name {
+  font-size: 16px;
+  font-weight: 600;
+  color: #374151;
+}
+
+.metric-score {
+  font-size: 18px;
+  font-weight: 700;
+  color: #111827;
+}
+
+.metric-bar {
+  height: 8px;
+  background: #e5e7eb;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.metric-fill {
+  height: 100%;
+  transition: width 0.5s ease;
+  border-radius: 4px;
+}
+
+.subtopics-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+.subtopic-card {
+  padding: 24px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border-radius: 12px;
+  transition: transform 0.2s ease;
+}
+
+.subtopic-card:hover {
+  transform: translateY(-4px);
+}
+
+.subtopic-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.subtopic-rank {
+  font-size: 14px;
+  font-weight: 700;
+  background: rgba(255, 255, 255, 0.2);
+  padding: 4px 12px;
+  border-radius: 12px;
+}
+
+.subtopic-score {
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.subtopic-name {
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+.subtopic-reasoning {
+  font-size: 14px;
+  line-height: 1.6;
+  opacity: 0.9;
+  margin-bottom: 12px;
+}
+
+.subtopic-volume {
+  font-size: 12px;
+  opacity: 0.7;
+  font-weight: 600;
+}
+
+.detailed-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+}
+
+.detailed-item {
+  padding: 20px;
+  background: #f9fafb;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.detailed-label {
+  font-size: 14px;
+  color: #6b7280;
+  font-weight: 500;
+}
+
+.detailed-value {
+  font-size: 24px;
+  font-weight: 700;
+  color: #111827;
+}
+
+@media (max-width: 768px) {
+  .results-container {
+    padding: 24px;
+  }
+
+  .topic-title {
+    font-size: 28px;
+  }
+
+  .breakout-score {
+    flex-direction: column;
+    text-align: center;
+    gap: 20px;
+  }
+
+  .stats-grid,
+  .subtopics-grid,
+  .detailed-grid {
+    grid-template-columns: 1fr;
+  }
+}
